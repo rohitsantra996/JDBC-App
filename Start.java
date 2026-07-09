@@ -14,7 +14,8 @@ public class Start {
             System.out.println("Press 1 to add student ");
             System.out.println("Press 2 to delete student ");
             System.out.println("press 3 to display student ");
-            System.out.println("press 4 to exit app");
+            System.out.println("Press 4 to display student");
+            System.out.println("press 5 to exit app");
 
             int c = Integer.parseInt(br.readLine());
             
@@ -30,15 +31,47 @@ public class Start {
                 String city = br.readLine();
 
                 Student st = new Student(name , phone , city);
-                StudentDao.insertStudentToDB(st);
+                boolean answer = StudentDao.insertStudentToDB(st);
+                if (answer){
+                    System.out.println("Student Succefully added....");
+                }else {
+                    System.out.println("Something went wrong ....");
+                }
                 System.out.println(st);
 
             } else if (c==2) {
                 //delete
+                System.out.println("Enter student id to delete");
+                int userId = Integer.parseInt(br.readLine());
+                  boolean deleted = StudentDao.deleteStudent(userId);
+                  if (deleted){
+                      System.out.println("Deleted......");
+
+                  }else {
+                      System.out.println("Something went wrong...");
+                  }
             } else if (c==3) {
                 //display
+              boolean s = StudentDao.showAllStudent();
+              if (s){
+                  System.out.println("displayed ......");
+              }else {
+                  System.out.println("Something Wrong......");
+              }
             } else if (c==4) {
-                //exit
+                //update
+                System.out.println("Enter id ");
+                int id = Integer.parseInt(br.readLine());
+
+                System.out.println("Enter city for update  ");
+                String city = br.readLine();
+              boolean b=  StudentDao.UpdateTable(city ,id);
+                         if (b){
+                             System.out.println("Updated .....");
+
+                         }else {
+                             System.out.println("something went wrong ......");
+                         }
 
                 break;
 

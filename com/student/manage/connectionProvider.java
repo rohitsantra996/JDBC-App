@@ -13,7 +13,7 @@ public class connectionProvider {
 
 
                 //Create Connection
-                String url = "jdbc:mysql://localhost:3306/youtube";
+                String url = "jdbc:mysql://localhost:3306/student_manage";
                 String username ="root";
                 String password ="apnacollegedsa9229";
                  con = DriverManager.getConnection(url,username,password);

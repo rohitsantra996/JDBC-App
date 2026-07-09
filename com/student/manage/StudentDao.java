@@ -1,15 +1,101 @@
 package com.student.manage;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.*;
 
 public class StudentDao {
-    public static void insertStudentToDB(Student st){
-
+    public static boolean insertStudentToDB(Student st){
+    boolean f = false;
       try {
           Connection con = connectionProvider.createConnection();
 
+          String q = "insert into students( sname , sphone ,scity) values (? , ? ,?)";
+            PreparedStatement pstmt  =con.prepareStatement(q);
+
+            pstmt.setString(1, st.getStudentName());
+            pstmt.setString(2,st.getStudentPhone());
+            pstmt.setString(3, st.getStudentCity());
+
+            pstmt.executeUpdate();
+            f = true;
+
       }catch (Exception e){
           e.printStackTrace();
+
       }
+      return f;
+    }
+
+    public static boolean deleteStudent(int userId) {
+        boolean f = false;
+        try {
+            Connection con = connectionProvider.createConnection();
+
+            String q = "delete from students where sid = ?";
+            PreparedStatement pstmt  =con.prepareStatement(q);
+
+            pstmt.setInt(1, userId);
+
+
+            pstmt.executeUpdate();
+            f = true;
+
+        }catch (Exception e){
+            e.printStackTrace();
+
+        }
+        return f;
+
+    }
+
+    public static boolean showAllStudent() {
+        boolean f1 =false;
+        try{
+            Connection con = connectionProvider.createConnection();
+
+            String q = "select * from students";
+
+            Statement stmt = con.createStatement();
+            ResultSet resultSet = stmt.executeQuery(q);
+
+            while (resultSet.next()){
+                int id = resultSet.getInt(1);
+                String  name  = resultSet.getString(2);
+                String phone = resultSet.getString(3);
+                String city = resultSet.getString(4);
+
+
+                System.out.println("ID : " + id);
+                System.out.println("Name : " + name);
+                System.out.println("Phone : " + phone);
+                System.out.println("City : " + city);
+                System.out.println("+++++++++++++++++++++++++++++");
+            f1 =true;
+
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return f1;
+
+    }
+
+    public static boolean UpdateTable( String city,int userid) {
+
+         boolean f2 = false;
+        try {
+            Connection con = connectionProvider.createConnection();
+            String q = "update students set scity =? where sid = ?";
+           PreparedStatement pstmt = con.prepareStatement(q);
+           pstmt.setString(1,city);
+           pstmt.setInt(2,userid);
+           pstmt.executeUpdate();
+           f2 =true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+   return f2;
     }
 }
