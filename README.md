@@ -1,7 +1,35 @@
+# JDBC Student Management System
 
-### GitHub mein add karne ka simple way
+A simple console-based **Student Management System** built using **Java, JDBC, and MySQL**.
 
-Repository → **Add file** → **Create new file** → filename:
+This project was created while learning **Java JDBC and database connectivity**. It demonstrates how a Java application can connect with a MySQL database and perform basic CRUD operations.
+
+## 🚀 Features
+
+- Add a new student
+- Delete a student using student ID
+- Display all students
+- Update student's city
+- Console-based menu system
+- MySQL database connectivity
+
+## 🛠️ Technologies Used
+
+- Java
+- JDBC (Java Database Connectivity)
+- MySQL
+- MySQL JDBC Driver
+
+## 📂 Project Structure
 
 ```text
-README.md
+JDBC-App
+│
+├── Start.java
+│
+└── com
+    └── student
+        └── manage
+            ├── Student.java
+            ├── StudentDao.java
+            └── connectionProvider.java
